@@ -21,6 +21,7 @@ function read_properties {
 # $2 - SonarQube URL. Must end with a slash (required)
 # $3 - CE Task ID (required)
 function sq_ce_task {
+  echo curl -s -L -u "${1}" "${2}api/ce/task?id=${3}&additionalField=stacktrace,scannerContext"
   curl -s -L -u "${1}" "${2}api/ce/task?id=${3}&additionalField=stacktrace,scannerContext"
 }
 

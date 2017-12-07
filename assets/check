@@ -12,6 +12,7 @@ source "${root}/common.sh"
 
 payload=$(mktemp "${TMPDIR}/sonarqube-resource-check.XXXXXX")
 cat > "${payload}" <&0
+cat ${payload}
 
 latest_version=$(jq -r '.version.ce_task_id // ""' < "${payload}")
 if [ ! -z "${latest_version}" ]; then
