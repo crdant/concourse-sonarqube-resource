@@ -61,6 +61,11 @@ if [ ! -z "${sonar_password}" ]; then
   scanner_opts+=" -Dsonar.password=${sonar_password}"
 fi
 
+sonar_organization=$(jq -r '.source.organization // ""' < "${payload}")
+if [ ! -z "${sonar_organization}" ]; then
+  scanner_opts+=" -Dsonar.organization=${sonar_organization}"
+fi
+
 maven_settings_file=$(jq -r '.params.maven_settings_file // ""' < "${payload}")
 if [ ! -z "${maven_settings_file}" ] && [ -f "${maven_settings_file}" ]; then
   scanner_opts+=" -s ${maven_settings_file}"
